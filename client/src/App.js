@@ -1,14 +1,18 @@
 import React from 'react';
 import {useAuth} from './auth/Auth';
-import Navbar from './navbar/Navbar'
+import Navbar from './navbar/Navbar';
+import { Paper } from '@mui/material';
+import Container from '@mui/material/Container';
+import SmallContainer from './util/SmallContainer'
+
 function App() {
 
   let auth = useAuth();
 
   return (
-    <React.Fragment>
-      <Navbar />
-    </React.Fragment>
+    <SmallContainer>
+      <p>Some content</p>
+    </SmallContainer>
   );
 }
 
