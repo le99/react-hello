@@ -12,7 +12,7 @@ let AuthContext = React.createContext(null);
 
 
 function localSaveAccount(account){
-  if(account != null){
+  if(account == null){
     return localStorage.clear('auth');
   }
   localStorage.setItem('auth', JSON.stringify(account));
