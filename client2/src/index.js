@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignIn from './auth/SignIn';
@@ -31,7 +30,7 @@ root.render(
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="recover" element={<Recover />} />
-          <Route path="doc/new" element={
+          <Route path="home" element={
             <RequireAuth><App /></RequireAuth>
           } />
          
