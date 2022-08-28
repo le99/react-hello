@@ -12,9 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {useAuth} from './Auth';
+import {Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -36,24 +35,25 @@ export default function SignIn() {
   let navigate = useNavigate();
   let location = useLocation();
   let auth = useAuth();
+  let from = (location.state && location.state.from && location.state.from.pathname) || "/home";
 
-  let from = (location.state && location.state.from && location.state.from.pathname) || "/doc/list";
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    auth.recover(data.get('email')).then(()=>{
-      navigate(from, { replace: true });
-    });
-  };
-
-  
   React.useEffect(() => {
     if(auth.user){
       navigate(from, { replace: true });
     }
   }, []);
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    
+    await auth.signin({
+      email: data.get('email'),
+      password: data.get('password'),
+    })
+    navigate(from, { replace: true });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -89,22 +89,15 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="New Password"
+              label="Password"
               type="password"
               id="password"
-              autoComplete="new-password"
+              autoComplete="current-password"
             />
-
-            <Typography variant="body1" color="error">
-              {(auth.metamaskError == 'No etheruem provider')? 
-                <LinkUI href="https://metamask.io/">
-                  To use this app please install Metamask. Click here to Install. 
-                </LinkUI>
-                :
-                auth.metamaskError
-              }
-            </Typography>
-
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
             <Button
               type="submit"
               fullWidth
@@ -117,9 +110,9 @@ export default function SignIn() {
               <Grid item xs>
               </Grid>
               <Grid item>
-                <LinkUI variant="body2" component={Link} to="/signup">
+                <LinkUI href="#" variant="body2" component={Link} to="/signup">
                   {"Don't have an account? Sign Up"}
-                </LinkUI>                  
+                </LinkUI>
               </Grid>
             </Grid>
           </Box>

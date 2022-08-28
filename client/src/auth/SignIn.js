@@ -12,11 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {useAuth} from './Auth';
-import {Buffer} from 'buffer';
-import * as metamask from './metamask';
+import {Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -35,31 +32,10 @@ const theme = createTheme();
 
 export default function SignIn() {
 
-  const str = "7b227061796c6f6164223a226d79206d657373616765222c227369676e6174757265223a22307866303833323638623064333831303736303239646535613238643933653239656363653464623063623734653131646133666631393962323830306562633636336634333361663637666566666233313866643632616433383735623730343037386263626461303137643931613130353639353532346563636238353635633162227d";
-  const {payload, signature} = JSON.parse(Buffer.from(str, 'hex').toString('utf-8'));
-  const expectedsPk = "0x036f963436ea0673601bda997b1c51b4c76dc36661b11daf04b5f8d4a59fb742dc"
-  const gotPk = metamask.recoverPublicKey(payload, signature);
-
-  console.log(gotPk);
-  console.log(expectedsPk);
-  console.log(expectedsPk.slice(2) == gotPk);
-
-
-
   let navigate = useNavigate();
   let location = useLocation();
   let auth = useAuth();
-
-  let from = (location.state && location.state.from && location.state.from.pathname) || "/doc/list";
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    auth.signin(data.get('email')).then(()=>{
-      navigate(from, { replace: true });
-    });
-  };
+  let from = (location.state && location.state.from && location.state.from.pathname) || "/home";
 
   React.useEffect(() => {
     if(auth.user){
@@ -67,7 +43,18 @@ export default function SignIn() {
     }
   }, []);
 
-  
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    
+    await auth.signin({
+      email: data.get('email'),
+      password: data.get('password'),
+    })
+    navigate(from, { replace: true });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -111,17 +98,6 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-
-            <Typography variant="body1" color="error">
-              {(auth.metamaskError == 'No etheruem provider')? 
-                <LinkUI href="https://metamask.io/">
-                  To use this app please install Metamask. Click here to Install. 
-                </LinkUI>
-                :
-                auth.metamaskError
-              }
-            </Typography>
-
             <Button
               type="submit"
               fullWidth
@@ -132,20 +108,14 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
+                <LinkUI href="#" variant="body2" component={Link} to="/recover">
+                  Forgot password?
+                </LinkUI>
               </Grid>
               <Grid item>
-                <LinkUI variant="body2" component={Link} to="/signup">
+                <LinkUI href="#" variant="body2" component={Link} to="/signup">
                   {"Don't have an account? Sign Up"}
-                </LinkUI>                  
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs>
-              </Grid>
-              <Grid item>
-                <LinkUI variant="body2" component={Link} to="/recover">
-                  {"Forgot password or Metamask account?"}
-                </LinkUI>                  
+                </LinkUI>
               </Grid>
             </Grid>
           </Box>

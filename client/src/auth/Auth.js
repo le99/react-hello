@@ -12,7 +12,7 @@ let AuthContext = React.createContext(null);
 
 
 function localSaveAccount(account){
-  if(account == null){
+  if(account != null){
     return localStorage.clear('auth');
   }
   localStorage.setItem('auth', JSON.stringify(account));
@@ -26,7 +26,7 @@ function localGetAccount(){
   return JSON.parse(r);
 }
 
-function localRemoveAccounts(){
+function localRemoveAccount(){
   localStorage.removeItem('auth');
 }
 
@@ -39,20 +39,17 @@ export function AuthProvider({ children }) {
     setUser(account);
   }, []);
 
-
-  let signin = async () => {
-    const account = {}
+  let signin = async ({email, password}) => {
+    const account = {email}
     localSaveAccount(account);
     setUser(account);
-    
   };
 
   let recover = async () => {
-    console.log('recover');
   };
 
   let signout = () => {
-    localRemoveAccounts();
+    localRemoveAccount();
     setUser(null);
   };
 

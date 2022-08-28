@@ -13,8 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useAuth} from './Auth';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+import {Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -31,31 +30,31 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
-  let auth = useAuth();
-  let location = useLocation();
+export default function SignIn() {
+
   let navigate = useNavigate();
-
-  let from = (location.state && location.state.from && location.state.from.pathname) || "/doc/list";
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    auth.signin(data.get('email')).then(()=>{
-      navigate(from, { replace: true });
-    });
-  };
+  let location = useLocation();
+  let auth = useAuth();
+  let from = (location.state && location.state.from && location.state.from.pathname) || "/home";
 
   React.useEffect(() => {
     if(auth.user){
       navigate(from, { replace: true });
     }
   }, []);
-  
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    
+    await auth.signin({
+      email: data.get('email'),
+      password: data.get('password'),
+    })
+    navigate(from, { replace: true });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -74,66 +73,31 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Typography variant="body1" color="error">
-              {(auth.metamaskError == 'No etheruem provider')? 
-                <LinkUI href="https://metamask.io/">
-                  To use this app please install Metamask. Click here to Install. 
-                </LinkUI>
-                :
-                auth.metamaskError
-              }
-            </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
             <Button
               type="submit"
               fullWidth
@@ -142,16 +106,21 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container>
+              <Grid item xs>
+                <LinkUI href="#" variant="body2" component={Link} to="/recover">
+                  Forgot password?
+                </LinkUI>
+              </Grid>
               <Grid item>
-                <LinkUI variant="body2" component={Link} to="/signin">
-                  Already have an account? Sign in
+                <LinkUI href="#" variant="body2" component={Link} to="/signin">
+                  {"Have an account? Sign In"}
                 </LinkUI>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
