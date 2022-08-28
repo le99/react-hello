@@ -40,7 +40,10 @@ export function AuthProvider({ children }) {
   }, []);
 
   let signin = async ({email, password}) => {
-    const account = {email}
+    let account = {email}
+    if(!email){
+      account = {email:'default@default.com'}
+    }
     localSaveAccount(account);
     setUser(account);
   };
