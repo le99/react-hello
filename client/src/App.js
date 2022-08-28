@@ -8,7 +8,6 @@ function App() {
   return (
     <React.Fragment>
       <Navbar />
-      <button onClick={() => {auth.signout()}}>sign out</button>
     </React.Fragment>
   );
 }

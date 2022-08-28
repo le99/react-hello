@@ -184,7 +184,7 @@ export default function MenuAppBar({backPage}) {
         >
           <List>
             <ListItem disablePadding>
-              <ListItemButton onClick={() => {navigate(`/doc/list`);}}>
+              <ListItemButton>
                 <ListItemIcon>
                   <DescriptionIcon />
                 </ListItemIcon>
