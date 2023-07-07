@@ -1,0 +1,9 @@
+./client/node_modules
+./client/npm-debug.log
+
+./server/node_modules
+./server/.env
+./server/npm-debug.log
+./server/public
+
+./minikube
