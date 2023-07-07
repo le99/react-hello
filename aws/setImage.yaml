@@ -1,0 +1,11 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-org0app0
+spec:
+  template:
+    spec:
+      containers:
+      - name: apporg0app0
+        image: le999/react_hello:1.0

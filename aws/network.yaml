@@ -1,0 +1,44 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-org0app0
+  labels:
+    app: apporg0app0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apporg0app0
+  template:
+    metadata:
+      labels:
+        app: apporg0app0
+    spec:
+      containers:
+      - name: apporg0app0
+        image: le999/org0app0:1.0
+        ports:
+        - containerPort: 3000
+        env:
+          - name: PORT
+            value: "3000"
+
+          - name: MONGO_URI
+            value: mongodb://root:example@mongodborg0:27017/mydb
+            
+            
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apporg0app0
+spec:
+  type: ClusterIP
+  selector:
+    app: apporg0app0
+  ports:
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
