@@ -3,8 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var fs = require('fs');
 var apiRouter = require('./src/api/routes');
+
+const inDirs = fs.readdirSync(path.join(__dirname, 'config'), { withFileTypes: true });
+console.log(inDirs);
+const file = fs.readFileSync(path.join(__dirname, 'config','test.txt'), 'utf8');
+console.log(file);
+
 
 var app = express();
 

@@ -27,10 +27,15 @@ spec:
           - name: MONGO_URI
             value: mongodb://root:example@mongodborg0:27017/mydb
 
+        volumeMounts:
+          - name: connection-json
+            mountPath: /usr/src/app/config/test.txt
+            subPath: test.txt
+
       volumes:
-        - name: network-yaml
+        - name: connection-json
           configMap:
-            name: network-yaml
+            name: connection-json
 
             
             

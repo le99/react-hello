@@ -5,6 +5,7 @@
 ./server/.env
 ./server/npm-debug.log
 ./server/public
+./server/config/test.txt
 
 ./minikube
 ./aws
