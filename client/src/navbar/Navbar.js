@@ -108,7 +108,7 @@ export default function MenuAppBar({backPage}) {
             </MenuItem>
           )}
 
-          {auth.user.email && (
+          {auth.user && (
             <div>
               <IconButton
                 size="large"
