@@ -16,17 +16,17 @@
     <mat-card>
       <mat-card-content>
         
-        <form id="myForm" class="example-form">
+        <form id="myForm" class="example-form" [formGroup]="applyForm" (submit)="submitApplication()">
           <h1>
             Sign In
           </h1>
           <mat-form-field class="example-full-width">
             <mat-label>Email address</mat-label>
-            <input matInput value="a@a.com">
+            <input id="email" matInput formControlName="email">
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input matInput type="password" value="1234">
+            <input id="password" matInput type="password" formControlName="password">
           </mat-form-field>
           <button mat-raised-button color="primary">Sign in</button>
   

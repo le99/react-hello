@@ -12,17 +12,19 @@ import {MatCardModule} from '@angular/material/card';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { DashboardComponent } from './app/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SignupComponent,
     SigninComponent,
-    SignupComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { SignupComponent } from './auth/signup/signup.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
     MatGridListModule
   ],
   providers: [],
