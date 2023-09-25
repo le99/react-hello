@@ -1,3 +1,9 @@
 .example-spacer {
     flex: 1 1 auto;
 }
+
+#myForm {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
