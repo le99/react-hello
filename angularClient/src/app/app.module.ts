@@ -20,13 +20,15 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { DashboardComponent } from './app/dashboard/dashboard.component';
 
 import {MatMenuModule} from '@angular/material/menu';
+import { AppnavbarComponent } from './appnavbar/appnavbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     SigninComponent,
-    DashboardComponent
+    DashboardComponent,
+    AppnavbarComponent
   ],
   imports: [
     BrowserModule,

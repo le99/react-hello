@@ -1,3 +1,15 @@
 .example-spacer {
     flex: 1 1 auto;
 }
+
+#myCard {
+    margin-top: 10px;
+    max-width: 400px;
+    min-width: 300px;
+}
+
+#outerDiv {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
