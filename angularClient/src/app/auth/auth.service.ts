@@ -15,6 +15,7 @@ export class AuthService {
   }
   getAccount(): string | undefined {
     let r = localStorage.getItem('auth');
+    console.log(r);
     if(!r){
       return;
     }
@@ -22,6 +23,9 @@ export class AuthService {
   }
   removeAccount(){
     return localStorage.clear();
+  }
+  isLoggedIn(){
+    return this.getAccount() != undefined;
   }
 
   signin(email: string, password: string): Observable<void> {
