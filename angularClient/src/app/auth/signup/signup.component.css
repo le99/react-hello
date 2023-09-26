@@ -7,3 +7,15 @@
     display: flex;
     align-items: center;
 }
+
+#myCard {
+    margin-top: 100px;
+    max-width: 400px;
+    min-width: 300px;
+}
+
+#outerDiv {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
