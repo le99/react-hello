@@ -20,7 +20,6 @@ export class SigninComponent{
   });
 
   submitApplication() {
-    console.log(this.applyForm.value)
     if(!this.applyForm.value.email || !this.applyForm.value.password){
       return;
     }

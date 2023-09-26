@@ -15,7 +15,6 @@ export class SignupComponent {
   });
 
   submitApplication() {
-    console.log(this.applyForm.value)
     if(!this.applyForm.value.email || !this.applyForm.value.password){
       return;
     }

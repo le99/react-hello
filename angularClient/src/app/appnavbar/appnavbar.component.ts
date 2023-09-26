@@ -14,7 +14,6 @@ export class AppnavbarComponent {
   }
 
   signOut(): void {
-    console.log('sign out');
     this.authService.removeAccount();
     this.account = this.authService.getAccount();
     this.router.navigate(['signin']);

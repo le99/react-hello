@@ -15,7 +15,6 @@ export class AuthService {
   }
   getAccount(): string | undefined {
     let r = localStorage.getItem('auth');
-    console.log(r);
     if(!r){
       return;
     }
