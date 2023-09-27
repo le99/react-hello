@@ -25,6 +25,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {NgIf, NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatListModule} from '@angular/material/list';
     NgIf,
     NgFor,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

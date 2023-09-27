@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,5 +12,16 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class DashboardComponent implements OnInit{
   ngOnInit(): void {
   }
-  constructor(private router: Router, private authService: AuthService){}
+
+  data: string = "";
+  getData(): void {
+    this.http.get<any>('/api')
+      .pipe(
+        tap(x => {
+          this.data = JSON.stringify(x);
+        }),
+      ).subscribe();
+  }
+
+  constructor(private router: Router, private authService: AuthService, private http: HttpClient){}
 }

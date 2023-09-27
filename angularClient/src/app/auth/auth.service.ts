@@ -24,6 +24,7 @@ export class AuthService {
     return localStorage.clear();
   }
   isLoggedIn(){
+    console.log('IsLoggedIn: ' + this.getAccount() != undefined)
     return this.getAccount() != undefined;
   }
 
