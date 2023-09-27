@@ -21,6 +21,10 @@ import { DashboardComponent } from './app/dashboard/dashboard.component';
 
 import {MatMenuModule} from '@angular/material/menu';
 import { AppnavbarComponent } from './appnavbar/appnavbar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {NgIf, NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,12 @@ import { AppnavbarComponent } from './appnavbar/appnavbar.component';
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSidenavModule,
+    NgIf,
+    NgFor,
+    MatSelectModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

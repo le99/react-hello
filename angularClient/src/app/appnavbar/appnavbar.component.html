@@ -1,17 +1,30 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <span>{{account}}</span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>
-    </button>
 
-    <mat-menu #menu="matMenu">
-        <button *ngIf="account" mat-menu-item (click)="signOut()">
-        <span>Sign out</span>
-        </button>
-    </mat-menu>
-</mat-toolbar>
+
+<mat-drawer-container class="example-container" hasBackdrop="true">
+    <mat-drawer #drawer mode="over">
+        <mat-nav-list>
+            <a mat-list-item routerLink="dashboard">Dashboard</a>
+        </mat-nav-list>      
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleSideNav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>My App</span>
+            <span class="example-spacer"></span>
+            <span>{{account}}</span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [matMenuTriggerFor]="menu">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        
+            <mat-menu #menu="matMenu">
+                <button *ngIf="account" mat-menu-item (click)="signOut()">
+                <span>Sign out</span>
+                </button>
+            </mat-menu>
+        </mat-toolbar>
+        <ng-content></ng-content>
+    </mat-drawer-content>
+</mat-drawer-container>
+  

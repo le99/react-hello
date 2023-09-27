@@ -6,4 +6,11 @@
 
 #Angular docker-compose
 ./angularUp.sh
+
+
+#Angular localhost
+cd ./angularClient
+npm install -g @angular/cli
+npm install
+ng serve --open
 ```
